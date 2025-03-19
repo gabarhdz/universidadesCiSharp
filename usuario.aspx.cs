@@ -23,9 +23,12 @@ namespace universidades
         {
                     }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void btn_guardar_Click(object sender, EventArgs e)
         {
-
+            UsuarioSistema usuarioSistema = new UsuarioSistema(0, txt_nombre.Text, txt_apellido.Text, txt_email.Text);
+            usuarioSistema.contrasena = txt_contrasena.Text;
+            usuarioSistema.insertarBD();
         }
+
     }
 }

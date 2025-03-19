@@ -37,24 +37,24 @@
           Nombre
         </p>
             
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txt_nombre" runat="server"></asp:TextBox>
         
         <p>
             Apellido</p>
-        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txt_apellido" runat="server"></asp:TextBox>
         <br />
         <br />
         <p>
             Email
         </p>
-        <asp:TextBox ID="TextBox6" runat="server" TextMode="Email"></asp:TextBox>
+        <asp:TextBox ID="txt_email" runat="server" TextMode="Email"></asp:TextBox>
         <p>
-            Clave</p>
+            contrasena</p>
         <p>
-            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txt_contrasena" runat="server"></asp:TextBox>
         </p>
         <p>
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+             <asp:Button ID="btn_guardar" runat="server" Text="Guardar" OnClick="btn_guardar_Click" />
         </p>
         </div>
     </form>
