@@ -1,45 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+﻿using System.Data.SqlClient;
+using System;
+using System.Data;
 
 namespace universidades
 {
-	public class UsuarioSistema : Persona
-	{
-		private String contrasena;
-		public UsuarioSistema()
-		{
+    public class UsuarioSistema : Persona
+    {
+        private string _contrasena;
 
-		}
+        public UsuarioSistema() { }
 
-        public UsuarioSistema(int id, string nombre, string apellido, string email, string telefono) : base(id, nombre, apellido, email, telefono)
+        public UsuarioSistema(int id, string nombre, string apellido, string email, string contrasena)
         {
+            // Initialize base class properties
+            base.Id = id;
+            base.Nombre = nombre;
+            base.Apellido = apellido;
+            base.Email = email;
+
+            // Initialize this class property
+            this._contrasena = contrasena;
         }
-        public String contrasena { get => contrasena; set => contrasena = value; }
+
+        public string Contrasena
+        {
+            get => _contrasena;
+            set => _contrasena = value;
+        }
 
         public new void insertarBD()
-		{
-            //insertar en la base de datos
+        {
             using (SqlConnection con = new SqlConnection(General.basededatosactual))
-			{
-                using (SqlCommand cmd = new SqlCommand("INSERTAR_USUARIOSISTEMA", con))
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERTAR_USUARIO", con))
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@nombre", Nombre);
-                    cmd.Parameters.AddWithValue("@apellido", Apellido);
-                    cmd.Parameters.AddWithValue("@email", Email);
-                    cmd.Parameters.AddWithValue("@contrasena", contrasena);
-                    cmd.Parameters.AddWithValue("@telefono", Telefono);
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                }
+                    cmd.CommandType = CommandType.StoredProcedure;
 
+                    // Add all parameters
+                    cmd.Parameters.AddWithValue("@NOMBRE", Nombre);
+                    cmd.Parameters.AddWithValue("@APELLIDO", Apellido);
+                    cmd.Parameters.AddWithValue("@EMAIL", Email);
+                    cmd.Parameters.AddWithValue("@CONTRASENA", _contrasena);
+
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        // Enhanced error information
+                        string errorDetails = $"SQL Error Number: {ex.Number}, Message: {ex.Message}";
+                        throw new Exception("Error al insertar en la base de datos: " + errorDetails);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Error inesperado: " + ex.Message);
+                    }
+                }
             }
         }
-
-
-
     }
 }
