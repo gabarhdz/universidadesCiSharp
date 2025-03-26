@@ -7,10 +7,10 @@ namespace universidades
 {
     public abstract class Persona : CRUD
     {
-        private int id;
-        private string nombre;
-        private string apellido;
-        private string email;
+        protected int id;
+        protected string nombre;
+        protected string apellido;
+        protected string email;
 
         public Persona(int id, string nombre, string apellido, string email)
         {
@@ -40,14 +40,10 @@ namespace universidades
         }
 
         // Implementación del método faltante de la interfaz CRUD
-        public List<object> seleccionarTodosDB()
-        {
-            return seleccionarTodosBD();
-        }
 
-        protected int Id { get => id; set => id = value; }
-        protected string Nombre { get => nombre; set => nombre = value; }
-        protected string Apellido { get => apellido; set => apellido = value; }
-        protected string Email { get => email; set => email = value; }
+        public int Id { get => id; set => id = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Apellido { get => apellido; set => apellido = value; }
+        public string Email { get => email; set => email = value; }
     }
 }

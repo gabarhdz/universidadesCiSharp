@@ -15,6 +15,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            -moz-animation-iteration-count:4s;
         }
         
         #form1 {
@@ -81,6 +82,10 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(44, 82, 130, 0.3);
         }
+        .btn-borrar {
+            background-color: red;
+            color: white;
+        }
         
         [id$=lbl_mensaje] {
             display: block;
@@ -122,6 +127,19 @@
             <asp:Label ID="lbl_mensaje" runat="server" ForeColor="Red"></asp:Label>
         </p>
         </div>
+
+        <asp:GridView runat="server" ID="GrillaUsuariosSistemas">
+    <Columns>
+        <asp:TemplateField HeaderText="Acciones">
+            <ItemTemplate>
+                <asp:LinkButton ID="btnEliminar" runat="server" Text="Eliminar" CommandName="Eliminar" OnClick="Gridview1_clickfila" cssClass="btn-borrar" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
     </form>
+
+    
+    >
 </body>
 </html>

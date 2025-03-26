@@ -13,7 +13,7 @@ namespace universidades
         void eliminarBD();
         object seleccionarBD();
 
-        List<object> seleccionarTodosDB();
+        List<object> seleccionarTodosBD();
 
     }
 }
